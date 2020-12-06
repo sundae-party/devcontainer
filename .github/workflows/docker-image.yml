@@ -32,6 +32,15 @@ jobs:
     - name: Tag new docker image version
       if: startsWith(github.ref, 'refs/tags/v')
       run: docker tag sundaeparty/devcontainer:dev sundaeparty/devcontainer:${GITHUB_REF#refs/tags/}
+    
     - name: Push new taged version to Dockerhub
       if: startsWith(github.ref, 'refs/tags/v')
       run: docker push sundaeparty/devcontainer:${GITHUB_REF#refs/tags/}
+    
+    - name: Tag new docker image version to latest
+      if: startsWith(github.ref, 'refs/tags/v')
+      run: docker tag sundaeparty/devcontainer:dev sundaeparty/devcontainer:latest
+    
+    - name: Push latest version to Dockerhub
+      if: startsWith(github.ref, 'refs/tags/v')
+      run: docker push sundaeparty/devcontainer:latest
